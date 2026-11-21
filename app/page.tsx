@@ -73,20 +73,21 @@ export default function HomePage() {
             lazysecure에서 운영하거나 개발 중인 정보보안 관련 프로젝트입니다.
           </p>
         </div>
-        <div className="divide-y divide-[#d7d7d7] border-y border-[#d7d7d7]">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {services.map((service) => (
-            <article key={service.number} className="grid gap-5 py-7 md:grid-cols-[64px_minmax(0,1fr)_minmax(220px,0.65fr)_150px] md:gap-7">
-              <p className="font-mono text-sm text-[#b54b1d]">{service.number}</p>
-              <div className="space-y-2">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[#777]">{service.type}</p>
+            <article key={service.number} className="flex min-h-[260px] flex-col border border-[#d7d7d7] bg-white p-6">
+              <div className="flex items-center justify-between gap-4 border-b border-[#e4e4e4] pb-4">
+                <p className="font-mono text-xs text-[#b54b1d]">{service.number} / SERVICE</p>
+                <p className="text-xs text-[#777]">{service.type}</p>
+              </div>
+              <div className="flex-1 space-y-3 py-5">
                 <h3 className="text-xl font-semibold tracking-tight text-[#171717]">{service.name}</h3>
-                <p className="max-w-xl text-sm leading-7 text-[#555]">{service.description}</p>
+                <p className="text-sm leading-7 text-[#555]">{service.description}</p>
               </div>
-              <div className="border-l border-[#dedede] pl-5">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[#777]">운영 방식</p>
-                <p className="mt-2 text-sm leading-7 text-[#555]">{service.operation}</p>
+              <div className="border-t border-[#e4e4e4] pt-4">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-[#888]">운영 방식</p>
+                <p className="mt-2 text-sm leading-6 text-[#555]">{service.operation}</p>
               </div>
-              <div className="flex items-start md:justify-end"><span className="inline-flex min-h-10 items-center border border-[#d0d0d0] px-3 text-xs text-[#777]">서비스 안내</span></div>
             </article>
           ))}
         </div>
