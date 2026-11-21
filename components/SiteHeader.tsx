@@ -1,172 +1,46 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'motion/react';
-import { MetroIcon } from '@/components/MetroIcon';
-import { siteConfig } from '@/config/site';
-import {
-  METRO_EASE,
-  METRO_PIVOT_INDICATOR_DURATION,
-} from '@/lib/navigation-motion';
-import { cn } from '@/lib/utils';
+
+const navigation = [
+  { label: '홈', href: '/' },
+  { label: '서비스', href: '/#services' },
+  { label: '조직 소개', href: '/about' },
+  { label: '문의', href: '/contact' },
+];
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [openPathname, setOpenPathname] = useState<string | null>(null);
-  const mobileOpen = openPathname === pathname;
-
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setOpenPathname(null);
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [mobileOpen]);
-
-  const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    return pathname === href || pathname.startsWith(`${href}/`);
-  };
 
   return (
-    <header className="sticky top-0 z-30 bg-white">
-      <div
-        className={cn(
-          'mx-auto flex h-16 items-center justify-between gap-8 px-4 sm:px-6',
-          siteConfig.layout.maxWidthClass
-        )}
-      >
-        {/* Zone 1: Metro workspace title */}
-        <Link
-          href="/"
-          className="font-mono text-sm font-semibold tracking-tight text-[#18181b] transition-colors hover:text-[#ea580c] whitespace-nowrap shrink-0"
-        >
-          {siteConfig.identity.handle}
+    <header className="sticky top-0 z-30 border-b border-[#d8d8d8] bg-[#f8f8f6]/95 backdrop-blur-sm">
+      <div className="mx-auto flex min-h-[76px] w-full max-w-[1180px] items-center justify-between gap-6 px-5 sm:px-8">
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="lazysecure 홈">
+          <span className="flex h-9 w-9 items-center justify-center bg-[#b54b1d] font-mono text-sm font-semibold text-white">L</span>
+          <span>
+            <span className="block text-lg font-semibold tracking-tight text-[#171717]">lazysecure</span>
+            <span className="block font-mono text-[9px] uppercase tracking-[0.16em] text-[#777]">Information Security</span>
+          </span>
         </Link>
-
-        {/* Zone 2: Official Metro Pivot navigation (active dark, inactive muted, lowercase) */}
-        <nav
-          aria-label="Primary navigation"
-          className="hidden md:flex items-baseline gap-7"
-        >
-          {siteConfig.navigation.map((item) => {
-            const active = isActive(item.href);
+        <nav aria-label="주요 메뉴" className="hidden items-center gap-7 md:flex">
+          {navigation.map((item) => {
+            const active = item.href === '/' ? pathname === '/' : item.href === '/about' ? pathname === '/about' : item.href === '/contact' ? pathname === '/contact' : false;
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? 'page' : undefined}
-                className={cn(
-                  'relative py-2 text-lg font-light tracking-tight transition-colors whitespace-nowrap shrink-0',
-                  active
-                    ? 'font-normal text-[#18181b]'
-                    : 'text-[#737276] hover:text-[#18181b]'
-                )}
-              >
-                {item.label.toLowerCase()}
-                {active && (
-                  <motion.span
-                    layoutId="metro-pivot-indicator"
-                    aria-hidden="true"
-                    transition={{
-                      duration: METRO_PIVOT_INDICATOR_DURATION,
-                      ease: METRO_EASE,
-                    }}
-                    className="absolute inset-x-0 bottom-0 h-[2px] bg-[#ea580c]"
-                  />
-                )}
+              <Link key={item.href} href={item.href} aria-current={active ? 'page' : undefined} className={`border-b-2 py-2 text-sm transition-colors ${active ? 'border-[#b54b1d] font-semibold text-[#171717]' : 'border-transparent text-[#666] hover:text-[#171717]'}`}>
+                {item.label}
               </Link>
             );
           })}
         </nav>
-
-        {/* Zone 3: Official Metro 2px outline action button + mobile trigger */}
-        <div className="flex items-center gap-2 shrink-0">
-          <a
-            href={siteConfig.identity.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 border-2 border-[#18181b] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#18181b] transition-colors hover:bg-[#18181b] hover:text-white whitespace-nowrap shrink-0"
-          >
-            <MetroIcon name="github" className="text-[13px]" />
-            <span>GitHub</span>
-            <MetroIcon name="arrow-up-right" className="text-[11px]" />
-          </a>
-
-          <button
-            type="button"
-            onClick={() =>
-              setOpenPathname((prev) => (prev === pathname ? null : pathname))
-            }
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-navigation-drawer"
-            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            className="inline-flex h-10 w-10 items-center justify-center bg-[#f2f2f3] text-[#18181b] transition-colors hover:bg-[#18181b] hover:text-white md:hidden shrink-0"
-          >
-            {mobileOpen ? (
-              <MetroIcon name="cross" className="text-[14px]" />
-            ) : (
-              <MetroIcon name="menu" className="text-[16px]" />
-            )}
-          </button>
-        </div>
+        <a href="https://github.com/lazysecure" target="_blank" rel="noopener noreferrer" className="hidden border border-[#777] px-3 py-2 text-xs font-semibold text-[#333] transition-colors hover:border-[#b54b1d] hover:bg-[#b54b1d] hover:text-white sm:inline-flex">
+          GitHub
+        </a>
       </div>
-
-      <AnimatePresence initial={false}>
-        {mobileOpen && (
-          <motion.nav
-            id="mobile-navigation-drawer"
-            aria-label="Mobile navigation"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: METRO_EASE }}
-            className="bg-[#18181b] px-4 py-4 text-white md:hidden"
-          >
-            <ul className="flex flex-col gap-1">
-              {siteConfig.navigation.map((item) => {
-                const active = isActive(item.href);
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setOpenPathname(null)}
-                      aria-current={active ? 'page' : undefined}
-                      className={cn(
-                        'flex min-h-[44px] items-center justify-between px-3 py-2 text-lg font-light transition-colors',
-                        active
-                          ? 'bg-[#c2410c] font-normal text-white'
-                          : 'text-[#d4d4d8] hover:bg-[#27272a] hover:text-white'
-                      )}
-                    >
-                      <span>{item.label.toLowerCase()}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-              <li className="pt-2">
-                <a
-                  href={siteConfig.identity.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex min-h-[44px] items-center justify-between border-2 border-white px-3 py-2 text-sm font-semibold text-white"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <MetroIcon name="github" className="text-[15px]" />
-                    <span>GitHub Profile</span>
-                  </span>
-                  <MetroIcon name="arrow-up-right" className="text-[13px]" />
-                </a>
-              </li>
-            </ul>
-          </motion.nav>
-        )}
-      </AnimatePresence>
+      <nav aria-label="모바일 메뉴" className="flex gap-5 overflow-x-auto border-t border-[#e5e5e5] px-5 py-2.5 text-xs text-[#555] md:hidden">
+        {navigation.map((item) => <Link key={item.href} href={item.href} className="shrink-0">{item.label}</Link>)}
+        <a href="https://github.com/lazysecure" target="_blank" rel="noopener noreferrer" className="shrink-0">GitHub</a>
+      </nav>
     </header>
   );
 }
