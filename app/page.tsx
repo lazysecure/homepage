@@ -13,7 +13,7 @@ const services = [
     type: '정보보안 콘텐츠',
     description: '보안 관련 소식과 기술 분석을 정리해 발행하는 정보 채널입니다.',
     operation: '편집·기술 검토를 거친 글 중심으로 운영합니다.',
-    href: 'https://hacker.blog.한국',
+    href: null,
     label: '블로그 방문',
   },
   {
@@ -22,7 +22,7 @@ const services = [
     type: '커뮤니티',
     description: '정보보안에 관심 있는 사람들이 질문과 지식을 나누는 커뮤니티입니다.',
     operation: '게시판 기반으로 주제별 토론과 정보 공유를 지원합니다.',
-    href: 'https://community.hacker.홈페이지.한국',
+    href: null,
     label: '커뮤니티 방문',
   },
   {
@@ -31,7 +31,7 @@ const services = [
     type: '인프라',
     description: 'lazysecure의 웹 서비스와 프로젝트를 뒷받침하는 서버 인프라입니다.',
     operation: '각 서비스의 목적과 요구사항에 맞춰 시스템을 구성하고 운영합니다.',
-    href: 'https://server.hacker.홈페이지.한국',
+    href: null,
     label: '서비스 정보',
   },
   {
@@ -40,7 +40,7 @@ const services = [
     type: '악성코드 아카이브',
     description: '실제 악성코드 샘플과 관련 분석 정보를 보존하는 보안 연구 아카이브입니다.',
     operation: '샘플은 비밀번호로 보호된 ZIP 형식으로 보관하며, 항목별 해시·탐지명·분석 요약·출처 정보를 기록합니다.',
-    href: 'https://virus.hacker.홈페이지.한국',
+    href: null,
     label: '아카이브 정보',
   },
 ];
@@ -106,7 +106,7 @@ export default function HomePage() {
         </div>
         <p className="text-xs leading-6 text-[#777]">
           Virus Archive는 실제 악성코드 샘플을 포함하는 연구 자료 아카이브입니다.
-          샘플은 일반 실행 파일이 아닌 비밀번호로 보호된 압축 파일로 제공되며,
+          샘플은 비밀번호로 보호된 압축 파일로 보관되며,
           안전한 연구 환경과 관련 주의사항을 전제로 취급해야 합니다.
         </p>
       </section>
@@ -132,7 +132,7 @@ export default function HomePage() {
         </div>
         <a href="https://github.com/critical-dummy" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center border border-[#222] px-4 text-sm font-semibold text-[#222] transition-colors hover:bg-[#222] hover:text-white">
           개발자 포트폴리오
-          <span aria-hidden="true" className="ml-4">↗</span>
+          <span aria-hidden="true" className="ml-4">→</span>
         </a>
       </section>
     </MotionSection>
