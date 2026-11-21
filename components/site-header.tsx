@@ -18,7 +18,7 @@ export function SiteHeader() {
         ))}
       </nav>
       <a className="header-link" href="https://github.com/lazysecure">
-        GitHub <span aria-hidden="true">↗</span>
+        GitHub <span aria-hidden="true">→</span>
       </a>
     </header>
   );
