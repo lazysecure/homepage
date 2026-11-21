@@ -1,151 +1,47 @@
 @import "tailwindcss";
-@import "./metro-icons.css" layer(base);
 
 @theme inline {
-  --font-sans: var(--font-open-sans), "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: Arial, "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
 }
 
 :root {
-  --bg-canvas: #ffffff;
-  --bg-surface: #f4f4f5;
-  --bg-surface-hover: #ebebee;
-  --text-primary: #18181b;
-  --text-secondary: #52525b;
-  --border-subtle: #e4e4e7;
-  --border-mid: #a3a2a5;
-  --accent-orange: #ea580c;
-  --accent-orange-dark: #c2410c;
+  color-scheme: light;
+  --page: #f8f8f6;
+  --ink: #171717;
+  --muted: #666666;
+  --rule: #d8d8d8;
+  --accent: #b54b1d;
 }
 
 @layer base {
+  * { box-sizing: border-box; }
   html {
-    background-color: var(--bg-canvas);
-    color: var(--text-primary);
+    background: var(--page);
+    color: var(--ink);
     font-family: var(--font-sans);
+    scroll-behavior: smooth;
     overflow-y: scroll;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
   body {
-    background-color: var(--bg-canvas);
-    color: var(--text-primary);
-    font-family: var(--font-sans);
     min-height: 100vh;
+    background: var(--page);
+    color: var(--ink);
   }
-
-  a:focus-visible,
-  button:focus-visible,
-  input:focus-visible,
-  select:focus-visible {
-    outline: 2px solid var(--accent-orange);
-    outline-offset: 2px;
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
-}
-
-/* Metro tile tactile press feedback */
-.metro-tile {
-  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), background-color 140ms ease, border-color 140ms ease;
-}
-
-.metro-tile:active {
-  transform: scale(0.99);
-}
-
-/* Official Windows Metro Desktop ScrollBar */
-::-webkit-scrollbar {
-  width: 15px;
-  height: 15px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #f2f2f3;
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #c1c1c5;
-  border: 2px solid #f2f2f3;
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #737276;
-}
-
-::-webkit-scrollbar-thumb:active {
-  background-color: #18181b;
-}
-
-::-webkit-scrollbar-corner {
-  background-color: #f2f2f3;
-}
-
-::-webkit-scrollbar-button:single-button {
-  display: block;
-  width: 15px;
-  height: 15px;
-  background-color: #f2f2f3;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 9px 9px;
-}
-
-::-webkit-scrollbar-button:single-button:hover {
-  background-color: #e4e4e7;
-}
-
-::-webkit-scrollbar-button:single-button:active {
-  background-color: #18181b;
-}
-
-::-webkit-scrollbar-button:single-button:vertical:decrement {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 6.8L5 3.2L8.5 6.8' fill='none' stroke='%2352525b' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar-button:single-button:vertical:decrement:active {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 6.8L5 3.2L8.5 6.8' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar-button:single-button:vertical:increment {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 3.2L5 6.8L8.5 3.2' fill='none' stroke='%2352525b' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar-button:single-button:vertical:increment:active {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 3.2L5 6.8L8.5 3.2' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar-button:single-button:horizontal:decrement {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M6.8 1.5L3.2 5L6.8 8.5' fill='none' stroke='%2352525b' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar-button:single-button:horizontal:decrement:active {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M6.8 1.5L3.2 5L6.8 8.5' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar-button:single-button:horizontal:increment {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M3.2 1.5L6.8 5L3.2 8.5' fill='none' stroke='%2352525b' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar-button:single-button:horizontal:increment:active {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M3.2 1.5L6.8 5L3.2 8.5' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-}
-
-@supports not selector(::-webkit-scrollbar) {
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #c1c1c5 #f2f2f3;
-  }
+  ::selection { background: #ead2c5; color: #171717; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
