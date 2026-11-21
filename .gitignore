@@ -1,0 +1,25 @@
+# dependencies
+/node_modules
+
+# Next.js
+/.next/
+/out/
+
+# OpenNext / Wrangler
+/.open-next/
+/.wrangler/
+/.dev.vars*
+!.dev.vars.example
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts.tmp
+
+# local environment
+.env*
+!.env.example
+
+# editor and OS
+.DS_Store
+Thumbs.db
+.vscode/
