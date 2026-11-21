@@ -86,9 +86,7 @@ export default function HomePage() {
                 <p className="font-mono text-[11px] uppercase tracking-wider text-[#777]">운영 방식</p>
                 <p className="mt-2 text-sm leading-7 text-[#555]">{service.operation}</p>
               </div>
-              <div className="flex items-start md:justify-end">
-                <span className="inline-flex min-h-10 items-center border border-[#d0d0d0] px-3 text-xs text-[#777]">서비스 안내</span>
-              </div>
+              <div className="flex items-start md:justify-end"><span className="inline-flex min-h-10 items-center border border-[#d0d0d0] px-3 text-xs text-[#777]">서비스 안내</span></div>
             </article>
           ))}
         </div>
