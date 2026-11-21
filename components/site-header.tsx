@@ -1,3 +1,5 @@
+import { LanguageSwitch } from "@/components/language-switch";
+
 const navigation = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
@@ -17,7 +19,7 @@ export function SiteHeader() {
           <a href={item.href} key={item.label}>{item.label}</a>
         ))}
       </nav>
-      <a className="language-link" href="/ko" lang="ko">한국어</a>
+      <LanguageSwitch />
       <a className="header-link" href="https://github.com/lazysecure">
         GitHub <span aria-hidden="true">→</span>
       </a>
