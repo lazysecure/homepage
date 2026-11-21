@@ -17,6 +17,7 @@ export function SiteHeader() {
           <a href={item.href} key={item.label}>{item.label}</a>
         ))}
       </nav>
+      <a className="language-link" href="/ko" lang="ko">한국어</a>
       <a className="header-link" href="https://github.com/lazysecure">
         GitHub <span aria-hidden="true">→</span>
       </a>
