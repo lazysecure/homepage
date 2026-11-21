@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description:
     "An independent information security organization sharing research, technical knowledge, and community resources.",
   applicationName: "lazysecure",
-  metadataBase: new URL("https://lazysecure.org")
 };
 
 export default function RootLayout({
