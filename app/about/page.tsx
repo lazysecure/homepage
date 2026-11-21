@@ -1,149 +1,45 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { AvatarFrame } from '@/components/AvatarFrame';
-import { DataStatusBanner } from '@/components/DataStatusBanner';
-import { MetroIcon } from '@/components/MetroIcon';
 import { MotionSection } from '@/components/MotionSection';
-import { siteConfig } from '@/config/site';
-import { getGitHubProfile } from '@/lib/github';
-import { formatUtcDate } from '@/lib/github-logic';
 
 export const metadata: Metadata = {
-  title: 'About',
-  description:
-    'Developer profile, technical interests, and development philosophy for critical-dummy.',
+  title: '조직 소개',
+  description: 'lazysecure의 활동 방향과 프로젝트 운영 원칙.',
 };
 
-export const revalidate = 300;
-
-export default async function AboutPage() {
-  const profileResult = await getGitHubProfile(
-    siteConfig.identity.githubUsername
-  );
-  const profile = profileResult.data;
-
+export default function AboutPage() {
   return (
-    <MotionSection className="space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-light tracking-tight text-[#18181b] sm:text-4xl">
-          about
-        </h1>
-        <p className="max-w-2xl text-[15px] leading-relaxed text-[#52525b]">
-          {siteConfig.about.lead}
+    <MotionSection className="space-y-12 pt-8">
+      <header className="max-w-3xl space-y-5 border-b border-[#a3a2a5] pb-10">
+        <p className="font-mono text-xs text-[#b54b1d]">ABOUT LAZYSECURE</p>
+        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">조직 소개</h1>
+        <p className="text-base leading-8 text-[#555]">
+          lazysecure는 한국어 사용자를 중심으로 정보보안 관련 프로젝트를 기획하고,
+          기술을 개발하며, 실제 서비스를 운영하는 독립 기술 조직입니다.
         </p>
       </header>
-
-      {profileResult.status !== 'ok' && (
-        <DataStatusBanner
-          status={profileResult.status}
-          errorMessage={profileResult.errorMessage}
-          rateLimit={profileResult.rateLimit}
-        />
-      )}
-
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
-        {/* Borderless Charcoal Metro Profile Summary Tile */}
-        <aside className="space-y-6 bg-[#18181b] p-6 text-white lg:col-span-4">
-          <div className="flex items-center gap-3.5">
-            <AvatarFrame
-              src={profile?.avatarUrl}
-              alt={`${siteConfig.identity.handle} avatar`}
-              handle={siteConfig.identity.handle}
-              size={56}
-            />
-            <div className="min-w-0">
-              <p className="font-mono text-sm font-semibold text-white">
-                {profile?.login ?? siteConfig.identity.githubUsername}
-              </p>
-              <p className="text-xs text-[#a3a2a5]">
-                {profile?.name ?? siteConfig.identity.title}
-              </p>
-            </div>
-          </div>
-
-          <dl className="space-y-2.5 text-xs">
-            <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-[#a3a2a5]">Public repos</dt>
-              <dd className="font-mono font-semibold text-[#fb923c] tabular-nums">
-                {profile ? profile.publicRepos : 'Unavailable'}
-              </dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-[#a3a2a5]">Followers</dt>
-              <dd className="font-mono text-white tabular-nums">
-                {profile ? profile.followers : 'Unavailable'}
-              </dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-[#a3a2a5]">Following</dt>
-              <dd className="font-mono text-white tabular-nums">
-                {profile ? profile.following : 'Unavailable'}
-              </dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-[#a3a2a5]">Account created</dt>
-              <dd className="font-mono text-white tabular-nums">
-                {profile ? formatUtcDate(profile.createdAt) : 'Unavailable'}
-              </dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-[#a3a2a5]">Location</dt>
-              <dd className="font-mono text-white">
-                {profileResult.status === 'ok'
-                  ? (profile?.location ?? 'Not specified')
-                  : 'Unavailable'}
-              </dd>
-            </div>
-          </dl>
-
-          <div className="flex flex-col gap-2.5 pt-1">
-            <a
-              href={profile?.htmlUrl ?? siteConfig.identity.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="metro-tile inline-flex min-h-[40px] items-center justify-between bg-[#c2410c] px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#ea580c]"
-            >
-              <span>View GitHub Profile</span>
-              <MetroIcon name="arrow-up-right" className="text-[12px]" />
-            </a>
-            <Link
-              href="/projects"
-              className="metro-tile inline-flex min-h-[40px] items-center justify-between border-2 border-white bg-transparent px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[#18181b]"
-            >
-              <span>Inspect Repositories</span>
-              <MetroIcon name="arrow-right" className="text-[12px]" />
-            </Link>
-          </div>
-        </aside>
-
-        {/* Borderless Whitespace-Driven Metro Prose Sections */}
-        <div className="space-y-10 lg:col-span-8">
-          {siteConfig.about.sections.map((section) => (
-            <section
-              key={section.id}
-              aria-labelledby={`about-${section.id}`}
-              className="space-y-3"
-            >
-              <h2
-                id={`about-${section.id}`}
-                className="text-2xl font-light tracking-tight text-[#18181b]"
-              >
-                {section.heading.toLowerCase()}
-              </h2>
-              <div className="space-y-3">
-                {section.paragraphs.map((paragraph, idx) => (
-                  <p
-                    key={idx}
-                    className="max-w-2xl text-[15px] leading-relaxed text-[#3f3f46]"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </section>
-          ))}
+      <section className="grid gap-8 md:grid-cols-[220px_1fr]">
+        <h2 className="text-xl font-semibold">활동 분야</h2>
+        <div className="max-w-2xl space-y-4 text-sm leading-8 text-[#555]">
+          <p>정보보안 관련 콘텐츠와 지식 공유 환경을 만들고, 프로젝트에 필요한 웹 서비스와 인프라를 개발·운영합니다.</p>
+          <p>연구 자료를 다루는 프로젝트에서는 자료의 성격과 취급상 주의사항을 구분하고, 제공하는 정보의 출처와 한계를 명확하게 기록하는 것을 중요하게 생각합니다.</p>
         </div>
-      </div>
+      </section>
+      <section className="grid gap-8 border-t border-[#d8d8d8] pt-8 md:grid-cols-[220px_1fr]">
+        <h2 className="text-xl font-semibold">운영 원칙</h2>
+        <ul className="max-w-2xl list-disc space-y-3 pl-5 text-sm leading-7 text-[#555]">
+          <li>서비스의 목적과 제공 범위를 분명하게 안내합니다.</li>
+          <li>실제 기능과 확인 가능한 정보에 기반해 운영합니다.</li>
+          <li>각 프로젝트의 성격에 맞는 기술과 운영 방식을 선택합니다.</li>
+          <li>한국어를 기본 언어로 제공하고 필요한 경우 영어 정보를 보조적으로 제공합니다.</li>
+        </ul>
+      </section>
+      <section className="grid gap-6 border-t border-[#d8d8d8] pt-8 md:grid-cols-[220px_1fr]">
+        <h2 className="text-xl font-semibold">개발자</h2>
+        <div className="space-y-3">
+          <p className="text-sm leading-7 text-[#555]">프로젝트의 소스 코드와 개발 활동은 공개 GitHub 프로필에서 확인할 수 있습니다.</p>
+          <a href="https://github.com/critical-dummy" target="_blank" rel="noopener noreferrer" className="inline-flex border border-[#777] px-4 py-2.5 text-sm font-semibold hover:border-[#b54b1d] hover:bg-[#b54b1d] hover:text-white">개발자 포트폴리오</a>
+        </div>
+      </section>
     </MotionSection>
   );
 }
