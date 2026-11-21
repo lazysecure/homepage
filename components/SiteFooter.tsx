@@ -1,46 +1,21 @@
 import Link from 'next/link';
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
 
 export function SiteFooter() {
   return (
-    <footer className="mt-20 bg-[#f2f2f3] text-[#18181b]">
-      <div
-        className={cn(
-          'mx-auto flex flex-col gap-6 px-4 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6',
-          siteConfig.layout.maxWidthClass
-        )}
-      >
-        <div className="space-y-1">
-          <p className="font-mono text-xs font-semibold text-[#18181b]">
-            {siteConfig.identity.handle}
-          </p>
-          <p className="text-xs text-[#52525b]">
-            Public repository and profile data served via the GitHub REST API.
-          </p>
+    <footer className="mt-20 border-t border-[#d0d0d0] bg-[#efefed]">
+      <div className="mx-auto grid w-full max-w-[1180px] gap-8 px-5 py-9 sm:px-8 md:grid-cols-[1fr_auto] md:items-end">
+        <div className="space-y-2">
+          <p className="font-semibold tracking-tight text-[#171717]">lazysecure</p>
+          <p className="max-w-xl text-xs leading-6 text-[#666]">한국어 중심의 독립 정보보안 기술 프로젝트 조직</p>
+          <p className="font-mono text-[10px] text-[#888]">© {new Date().getFullYear()} lazysecure</p>
         </div>
-
-        <nav
-          aria-label="Footer navigation"
-          className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#52525b]"
-        >
-          {siteConfig.navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="transition-colors hover:text-[#18181b] whitespace-nowrap"
-            >
-              {item.label.toLowerCase()}
-            </Link>
-          ))}
-          <a
-            href={siteConfig.identity.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-[#c2410c] transition-colors hover:text-[#18181b] whitespace-nowrap"
-          >
-            github
-          </a>
+        <nav aria-label="하단 메뉴" className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#555]">
+          <Link href="/">홈</Link>
+          <Link href="/#services">서비스</Link>
+          <Link href="/about">조직 소개</Link>
+          <Link href="/contact">문의</Link>
+          <a href="https://github.com/lazysecure" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://github.com/critical-dummy" target="_blank" rel="noopener noreferrer">개발자 포트폴리오</a>
         </nav>
       </div>
     </footer>
