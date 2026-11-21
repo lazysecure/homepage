@@ -1,84 +1,30 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Mono, Open_Sans } from 'next/font/google';
-import { MetroTransitionProvider } from '@/components/MetroTransitionProvider';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
+import { MetroTransitionProvider } from '@/components/MetroTransitionProvider';
 import './globals.css';
 
-const openSans = Open_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
-  variable: '--font-open-sans',
-  display: 'swap',
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-ibm-plex-mono',
-  display: 'swap',
-});
-
-function resolveMetadataBase(): URL {
-  const candidate =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '') ||
-    process.env.APP_URL ||
-    `https://${siteConfig.domains.githubPages}`;
-
-  try {
-    return new URL(candidate);
-  } catch {
-    return new URL(`https://${siteConfig.domains.githubPages}`);
-  }
-}
-
 export const metadata: Metadata = {
-  metadataBase: resolveMetadataBase(),
+  metadataBase: new URL('https://해커.홈페이지.한국'),
   title: {
-    default: 'critical-dummy',
-    template: '%s · critical-dummy',
+    default: 'lazysecure — 정보보안 기술 프로젝트 조직',
+    template: '%s | lazysecure',
   },
-  description:
-    'Personal developer website and GitHub activity explorer for critical-dummy.',
+  description: 'lazysecure는 한국어 사용자를 중심으로 정보보안 관련 프로젝트와 서비스를 기획·개발·운영하는 독립 기술 조직입니다.',
   openGraph: {
-    title: 'critical-dummy',
-    description:
-      'Personal developer website and GitHub activity explorer for critical-dummy.',
+    title: 'lazysecure',
+    description: '한국어 중심의 독립 정보보안 기술 프로젝트 조직',
     type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'critical-dummy',
-    description:
-      'Personal developer website and GitHub activity explorer for critical-dummy.',
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={cn(openSans.variable, ibmPlexMono.variable)}
-    >
-      <body
-        suppressHydrationWarning
-        className="flex min-h-screen flex-col bg-white font-sans text-[#111113] antialiased"
-      >
+    <html lang="ko">
+      <body className="flex min-h-screen flex-col bg-[#f8f8f6] font-sans text-[#171717] antialiased">
         <MetroTransitionProvider>
           <SiteHeader />
-          <main
-            className={cn(
-              'mx-auto w-full flex-1 overflow-x-clip px-4 py-8 sm:px-6 sm:py-10',
-              siteConfig.layout.maxWidthClass
-            )}
-          >
+          <main className="mx-auto w-full max-w-[1180px] flex-1 overflow-x-clip px-5 py-8 sm:px-8 sm:py-10">
             {children}
           </main>
           <SiteFooter />
