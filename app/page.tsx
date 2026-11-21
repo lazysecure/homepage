@@ -64,7 +64,7 @@ export default function HomePage() {
               <h3>{service.name}</h3>
               <p>{service.description}</p>
               <a href={service.repository} target="_blank" rel="noreferrer">
-                Project repository <span aria-hidden="true">↗</span>
+                Project repository <span aria-hidden="true">→</span>
               </a>
             </article>
           ))}
@@ -117,7 +117,7 @@ export default function HomePage() {
             <p>Explore the public development profile and the organization&apos;s open-source work.</p>
           </div>
           <a className="button button-light" href="https://github.com/critical-dummy" target="_blank" rel="noreferrer">
-            Developer GitHub <span aria-hidden="true">↗</span>
+            Developer GitHub <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
