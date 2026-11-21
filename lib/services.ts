@@ -38,7 +38,7 @@ export const services: Service[] = [
     description:
       "A reference archive for malware-related identifiers, historical context, and defensive research.",
     operation:
-      "Entries focus on non-executable reference data, hashes, detection names, analysis summaries, and source references.",
+      "Its dedicated interface is planned around a Windows XP-inspired desktop metaphor. Entries focus on non-executable reference data, hashes, detection names, analysis summaries, and source references.",
     repository: "https://github.com/lazysecure/virus-archive",
     tone: "red"
   },
