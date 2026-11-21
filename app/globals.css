@@ -140,3 +140,11 @@ a:focus-visible { outline: 3px solid #0877bd; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+
+.language-link { padding: 6px 9px; border: 1px solid var(--line); color: #45454a; font-size: 11px; font-weight: 700; }
+.language-link:hover { border-color: var(--blue); color: var(--blue); }
+@media (max-width: 640px) {
+  .language-link { margin-left: auto; }
+  .header-link { margin-left: 0; }
+}
