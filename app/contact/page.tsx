@@ -1,62 +1,31 @@
 import type { Metadata } from 'next';
-import { ContactLinks } from '@/components/ContactLinks';
 import { MotionSection } from '@/components/MotionSection';
-import { siteConfig } from '@/config/site';
-import { getGitHubProfile } from '@/lib/github';
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description:
-    'GitHub profile and configurable contact channels for critical-dummy.',
+  title: '문의',
+  description: 'lazysecure 프로젝트 및 공개 개발 정보.',
 };
 
-export const revalidate = 300;
-
-export default async function ContactPage() {
-  const profileResult = await getGitHubProfile(
-    siteConfig.identity.githubUsername
-  );
-  const profile = profileResult.data;
-
-  const configuredHrefs = new Set(
-    siteConfig.contact.channels.map((c) => c.href?.replace(/\/+$/, ''))
-  );
-  const channels = [...siteConfig.contact.channels];
-
-  if (
-    profile?.blog &&
-    !configuredHrefs.has(profile.blog.replace(/\/+$/, ''))
-  ) {
-    channels.push({
-      id: 'github-profile-blog',
-      label: 'Website (from GitHub profile)',
-      value: profile.blog.replace(/^https?:\/\//, ''),
-      href: profile.blog.startsWith('http')
-        ? profile.blog
-        : `https://${profile.blog}`,
-      note: 'Discovered dynamically from public GitHub user metadata.',
-      copyable: true,
-      external: true,
-    });
-  }
-
+export default function ContactPage() {
   return (
-    <MotionSection className="space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-light tracking-tight text-[#18181b] sm:text-4xl">
-          contact
-        </h1>
-        <p className="max-w-2xl text-[15px] leading-relaxed text-[#52525b]">
-          {siteConfig.contact.lead}
+    <MotionSection className="space-y-10 pt-8">
+      <header className="max-w-3xl space-y-5 border-b border-[#a3a2a5] pb-10">
+        <p className="font-mono text-xs text-[#b54b1d]">CONTACT</p>
+        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">문의 및 공개 정보</h1>
+        <p className="text-base leading-8 text-[#555]">
+          lazysecure의 프로젝트와 개발 현황은 공개 저장소를 통해 확인할 수 있습니다.
+          문의 창구와 서비스별 안내는 각 프로젝트 페이지를 기준으로 확인해 주세요.
         </p>
       </header>
-
-      <div className="space-y-4">
-        <ContactLinks channels={channels} />
-
-        <p className="text-xs text-[#52525b]">
-          {siteConfig.contact.availabilityNote}
-        </p>
+      <div className="divide-y divide-[#d8d8d8] border-y border-[#d8d8d8]">
+        <div className="grid gap-2 py-6 sm:grid-cols-[200px_1fr]">
+          <h2 className="font-semibold">lazysecure GitHub</h2>
+          <a href="https://github.com/lazysecure" target="_blank" rel="noopener noreferrer" className="text-sm text-[#9b3e18] underline underline-offset-4">github.com/lazysecure</a>
+        </div>
+        <div className="grid gap-2 py-6 sm:grid-cols-[200px_1fr]">
+          <h2 className="font-semibold">개발자 포트폴리오</h2>
+          <a href="https://github.com/critical-dummy" target="_blank" rel="noopener noreferrer" className="text-sm text-[#9b3e18] underline underline-offset-4">github.com/critical-dummy</a>
+        </div>
       </div>
     </MotionSection>
   );
