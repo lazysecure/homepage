@@ -6,8 +6,8 @@ The official organization homepage for lazysecure.
 
 - Next.js App Router
 - TypeScript
-- OpenNext adapter for Cloudflare Workers
-- Cloudflare Workers for deployment
+- Static HTML export
+- Cloudflare Pages
 
 ## Local development
 
@@ -20,27 +20,29 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Cloudflare preview
+## Build
 
 ```bash
-npx wrangler login
-npm run preview
+npm run build
 ```
 
-## Deploy
+Next.js exports the static site to `out/`. Deploy the contents of that directory to Cloudflare Pages.
 
-```bash
-npm run deploy
-```
+## Cloudflare Pages
 
-Before deploying, review the Cloudflare account, Worker name, compatibility date, and custom-domain configuration in `wrangler.jsonc` and the Cloudflare dashboard.
+- Production branch: `main`
+- Framework preset: `Next.js (Static HTML Export)`
+- Build command: `npm run build`
+- Build output directory: `out`
+- Root directory: `/`
+
+The site is a static homepage and does not require a Cloudflare Worker runtime.
 
 ## Project structure
 
 - `app/` — routes, metadata, and global styles
 - `components/` — shared site chrome
 - `lib/services.ts` — service directory content
-- `wrangler.jsonc` — Cloudflare Workers configuration
 
 ## Content and safety
 
@@ -48,4 +50,4 @@ The Virus Archive is intended for defensive reference and research context. The 
 
 ## Language
 
-The site is English-first. Korean localization will be added as a separate, maintained language experience rather than an automatic machine-translated copy.
+The site is English-first, with a separately maintained Korean route at `/ko`.
